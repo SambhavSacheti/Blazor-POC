@@ -4,12 +4,35 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
+        {
+            "name": "Blazor Serverside ",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/HelloBlazor.Server/bin/Debug/netcoreapp3.1/HelloBlazor.Server.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/HelloBlazor.Server",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/HelloBlazor.Server/Views"
+            }
+        },
         {
             "type": "blazorwasm",
             "name": "Launch and Debug Blazor WebAssembly Application",
             "request": "launch",
             "cwd": "${workspaceFolder}/HelloBlazor.Client"
 
-        }
+        },
+
+
     ]
 }
