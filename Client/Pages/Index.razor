@@ -1,78 +1,35 @@
 ﻿@page "/"
 
 @inject IPublicApiService PublicApiService
+
 @using Microsoft.Extensions.Configuration
 @inject IConfiguration Configuration;
+@inherits IndexBase
 
 <h1>Blazor - Data Grid Demo</h1>
 
+    <RadzenCheckBox Style="margin-bottom: 20px" TValue="bool"  @bind-Value="@datagridVisible"/>
+    <RadzenSelectBar  Style="margin-bottom: 20px" TValue="int" Change="@(args => recordsCountChange(args))" >
+         <Items>
+                <RadzenSelectBarItem Text="Four" Value="4" />
+                <RadzenSelectBarItem Text="Six" Value="6" />
+                <RadzenSelectBarItem Text="Ten" Value="10" />
+            </Items>
+        </RadzenSelectBar>
 
 @if (publicApiEntries == null)
 {
     <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" Style="margin-bottom: 20px" />
 }
-else
+else if(datagridVisible)
 {
-    <RadzenHeader></RadzenHeader>
-    <RadzenTabs>
-    <Tabs>
-        <RadzenTabsItem Text="Api List">
-        <RadzenGrid  AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="@recordsPerPage"
-                AllowSorting="true" Data="@publicApiEntries" TItem="PublicApiEntry" ColumnWidth="200px" RowSelect="@((args)=>RowSelected(args))" >        
-        <Columns>
-            <RadzenGridColumn TItem="PublicApiEntry" Property="API" Title="API"  />
-            <RadzenGridColumn TItem="PublicApiEntry" Property="Image" Title="Photo" Sortable="false" Filterable="false">
-                <Template Context="data">
-                    <RadzenImage Path ="@data.Image" />
-                </Template>
-            </RadzenGridColumn>
-            <RadzenGridColumn TItem="PublicApiEntry" Property="Description" Title="Description" />
-            <RadzenGridColumn TItem="PublicApiEntry" Property="Auth" Title="Auth" />
-            <RadzenGridColumn TItem="PublicApiEntry" Property="Link" Title="Link" >
-                <Template Context="data">
-                    <RadzenLink Path="@data.Link" Text="@data.Link"/>
-                </Template>
-                </RadzenGridColumn>
-            <RadzenGridColumn TItem="PublicApiEntry" Property="Category" Title="Category" />
+    <SearchGrid ApiEntries=@publicApiEntries RecordsPerPage=@recordsPerPage  IsDatagridVisible=@datagridVisible  />
 
-        </Columns>
-        </RadzenGrid>   
-        </RadzenTabsItem > 
-        <RadzenTabsItem Text="Details">
-        <RadzenCard>
-            @if(selectedApiEntry== null)
-            {
-                <p>Please select a row to show the details here</p>
-            }
-            else{
-            <div class="row">
-                <div class="col-md-6">
-                    <div>Api:</div>
-                    <b>@selectedApiEntry.API</b>
-                    <div style="margin-top:20px">Link:</div>
-                    <RadzenLink Path="@selectedApiEntry.Link" Text="@selectedApiEntry.Link" />
-                    <br />
-                    <RadzenImage Path="@selectedApiEntry.Image" Style="width:400px;" />
-                </div>
-                <div class="col-md-6">
-                    <div>Category</div>
-                    <b>@selectedApiEntry.Category</b>
-                     <div style="margin-top:20px">Description</div>
-                    <b>@selectedApiEntry.Description</b>
-                </div>
-                 </div>
-            }
-        </RadzenCard>
-        </RadzenTabsItem>
-        </Tabs>
-        </RadzenTabs>
-  }
+}
 
 @code {
-    private List<PublicApiEntry> publicApiEntries;
-    private int recordsPerPage = 6;
-    private PublicApiEntry selectedApiEntry;
-    protected override async Task OnInitializedAsync()
+    
+      protected override async Task OnInitializedAsync()
     {
         publicApiEntries = (await PublicApiService.GetPublicApiEntries()).ToList();
         int i = 0;
@@ -82,9 +39,4 @@ else
         }
     }
 
-    void RowSelected(PublicApiEntry apiEntry)
-    {
-        selectedApiEntry = apiEntry;
-        StateHasChanged();
-    }
 }

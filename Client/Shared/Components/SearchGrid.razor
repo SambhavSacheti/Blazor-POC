@@ -1,0 +1,58 @@
+@inherits SearchGridBase    
+
+@if(IsDatagridVisible)
+{
+    <RadzenTabs >
+    <Tabs>
+        <RadzenTabsItem Text="Api List">
+        <RadzenGrid AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="@RecordsPerPage"
+                AllowSorting="true" Data=@ApiEntries TItem="PublicApiEntry" ColumnWidth="200px" RowSelect="@((args)=>RowSelected(args))" 
+                >        
+        <Columns>
+            <RadzenGridColumn TItem="PublicApiEntry" Property="API" Title="API"  />
+            <RadzenGridColumn TItem="PublicApiEntry" Property="Image" Title="Photo" Sortable="false" Filterable="false">
+                <Template Context="data">
+                    <RadzenImage Path ="@data.Image" />
+                </Template>
+            </RadzenGridColumn>
+            <RadzenGridColumn TItem="PublicApiEntry" Property="Description" Title="Description" />
+            <RadzenGridColumn TItem="PublicApiEntry" Property="Auth" Title="Auth" />
+            <RadzenGridColumn TItem="PublicApiEntry" Property="Link" Title="Link" >
+                <Template Context="data">
+                    <RadzenLink Path="@data.Link" Text="@data.Link"/>
+                </Template>
+                </RadzenGridColumn>
+            <RadzenGridColumn TItem="PublicApiEntry" Property="Category" Title="Category" />
+
+        </Columns>
+        </RadzenGrid>   
+        </RadzenTabsItem > 
+        <RadzenTabsItem Text="Details">
+        <RadzenCard>
+            @if(SelectedApiEntry== null)
+            {
+                <p>Please select a row to show the details here</p>
+            }
+            else{
+            <div class="row">
+                <div class="col-md-6">
+                    <div>Api:</div>
+                    <b>@SelectedApiEntry.API</b>
+                    <div style="margin-top:20px">Link:</div>
+                    <RadzenLink Path="@SelectedApiEntry.Link" Text="@SelectedApiEntry.Link" />
+                    <br />
+                    <RadzenImage Path="@SelectedApiEntry.Image" Style="width:400px;" />
+                </div>
+                <div class="col-md-6">
+                    <div>Category</div>
+                    <b>@SelectedApiEntry.Category</b>
+                     <div style="margin-top:20px">Description</div>
+                    <b>@SelectedApiEntry.Description</b>
+                </div>
+                 </div>
+            }
+        </RadzenCard>
+        </RadzenTabsItem>
+        </Tabs>
+        </RadzenTabs>
+}
