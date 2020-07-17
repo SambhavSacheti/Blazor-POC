@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 
-namespace HelloBlazor.Shared.Components
+namespace HelloBlazor.App.Shared.Components
 {
     public class SearchGridBase : ComponentBase
     {

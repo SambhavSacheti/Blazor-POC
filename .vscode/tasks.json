@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Client/HelloBlazor.csproj",
+                "${workspaceFolder}/HelloBlazor.Client/HelloBlazor.Client.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/Client/HelloBlazor.csproj",
+                "${workspaceFolder}/HelloBlazor.Client/HelloBlazor.Client.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,7 +32,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/Client/HelloBlazor.csproj",
+                "${workspaceFolder}/HelloBlazor.Client/HelloBlazor.Client.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

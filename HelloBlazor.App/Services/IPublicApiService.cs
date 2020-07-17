@@ -2,6 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-interface IPublicApiService{
+public interface IPublicApiService{
     Task<IEnumerable<PublicApiEntry>> GetPublicApiEntries();
 }

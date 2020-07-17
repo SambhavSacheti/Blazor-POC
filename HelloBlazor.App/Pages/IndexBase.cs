@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 
-namespace HelloBlazor.Pages
+namespace HelloBlazor.App.Pages
 {
     public class IndexBase : ComponentBase
     {
