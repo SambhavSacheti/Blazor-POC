@@ -1,0 +1,57 @@
+@page "/validation"
+@using  System.ComponentModel.DataAnnotations;
+<h2> Validation Examples</h2>
+<EditForm Model="@validationModel" OnValidSubmit="HandleValidSubmit">
+     <div class="form-group row">
+        <label for="FirstName" class="col-sm-2 col-form-label text-sm-right">First Name: </label>
+        <div class="col-sm-4">
+           <InputText id="FirstName" @bind-Value="validationModel.Name.FirstName" />
+        </div>
+        <div class="col-sm-6">
+            <ValidationMessage For="@(() => validationModel.Name.FirstName)" />
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <label for="Model" class="col-sm-2 col-form-label text-sm-right">Model: </label>
+        <div class="col-sm-4">
+           <InputText id="Model" @bind-Value="validationModel.Model" />
+        </div>
+        <div class="col-sm-6">
+            <ValidationMessage For="@(() => validationModel.Model)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="Date" class="col-sm-2 col-form-label text-sm-right">Year: </label>
+        <div class="col-sm-4">
+           <InputDate id="Year" @bind-Value="validationModel.Year" />
+        </div>
+        <div class="col-sm-6">
+            <ValidationMessage For="@(() => validationModel.Year)" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="Date" class="col-sm-2 col-form-label text-sm-right">Year: </label>
+        <div class="col-sm-4">
+           <InputDate id="Year" @bind-Value="validationModel.Year" />
+        </div>
+        <div class="col-sm-6">
+            <ValidationMessage For="@(() => validationModel.Year)" />
+        </div>
+    </div>
+    <br/>
+    <button type="submit">Submit</button>
+     <ObjectGraphDataAnnotationsValidator />
+    <ValidationSummary />
+</EditForm>
+
+@code {
+    private ValidationExampleModel validationModel = new ValidationExampleModel();
+
+    private void HandleValidSubmit()
+    {
+        Console.WriteLine("OnValidSubmit");
+    }
+   
+}
