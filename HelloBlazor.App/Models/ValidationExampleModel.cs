@@ -16,8 +16,8 @@ namespace HelloBlazor.Apps.Models
         [EmailAddress, Required]
         public string Email { get; set; }
 
-        [Required,]
-        public string SerialNumber { get; set; }
+        [Required,Range(1000,10000)]
+        public int SerialNumber { get; set; }
 
         public string AdditionalDetails { get; set; }
         public ValidationExampleModel()
