@@ -1,0 +1,28 @@
+@page "/childcontentdemo"
+
+<h2> Demonstration of child component with custom content </h2>
+
+<EditForm Model="@demoModel">
+    <p>
+ <label>
+            Type something to apear in the Additional Details:
+            <InputText Style="margin-bottom: 20px" @bind-Value="@demoModel.AdditionalDetails"   @oninput="@(args => Change(args.Value.ToString()))"/>
+        </label>
+        <Profile> @demoModel.AdditionalDetails </Profile>
+</p>
+</EditForm>
+
+@code{
+   
+   DemoModel demoModel = new DemoModel();
+    private void Change(string details)
+    {
+        demoModel.AdditionalDetails = details;
+
+    }
+
+    class DemoModel{
+    public string AdditionalDetails {get;set;}= string.Empty;
+    }
+}
+
